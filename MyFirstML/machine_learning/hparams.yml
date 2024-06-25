@@ -1,0 +1,46 @@
+### Description: Hyperparameters for the machine learning models with sensible defaults. Not all hyperparameters are included, check the sklearn docs for more. Notice that some of the hyperparameters vary on a logarithmic scale. Hyperparameters are roughly divided by relevance into critical, important and optional.
+# Legend
+## *High: Higher Is Better. Higher values lead in general to better predictions, but slower model training.
+## *Bal: Balanced Is Better. There is no general trend to improve performance, one has to find the right balance.
+## Rec: x1 (x2, x3): Recommended default and realistic range of values for the hyperparameter. Note that this is quite subjective and depends on the problem.
+## Null: This means None in python, but yaml files only understand Null.
+
+# Random Forest (RF)
+# Important:
+RF_n_estimators: 100              # Number of trees to train for better averaging. *High. Rec: 100 (10, 500)
+RF_min_samples_leaf: 1            # Minimum number of samples required to be at a leaf node. Can reduce overfitting. *Bal. Rec: 1 (1, 50)
+# Optional:
+RF_max_features: 1.0              # Setting to values lower than 1.0 can reduce overfitting. *Bal. Rec: 1.0 ('sqrt', 'log2') or (0.1, 1.0)
+RF_max_depth: Null                # Maximum depth of the tree. *Bal. Rec: Null (3, 10)
+RF_min_impurity_decrease: 0.0     # Setting to higher than 0.0 can reduce overfitting. *Bal. Rec: 0.0 (0.0, 0.1)
+
+# Extreme Gradient Boosting (XGB)
+# Important:
+XGB_n_estimators: 100             # Number of trees in the forest. *High. Rec: 100 (10, 500)
+XGB_learning_rate: 0.1            # Boosting learning rate. *Bal. Rec: 0.1 (0.01, 0.5)
+# Optional:
+XGB_max_depth: 6                  # Maximum tree depth for base learners. *Bal. Rec: 6 (3, 10)
+
+# Neural Network (NN)
+# Critical:
+NN_learning_rate: 0.001           # Initial learning rate used: *Bal. Rec: 0.001 (0.00001, 0.1)
+NN_hidden_layer_sizes: [100, 50]  # Number of neurons of each hidden layer. Larger datasets need more layers and more neurons per layer. Usually should be decreasing. *Bal. Rec: [100, 50] ([100], [1000, 500, 250, 120, 60, 30])
+# Important:
+NN_solver: 'adam'                 # Solver: 'adam', 'lbfgs', 'sgd'. Rec: adam
+NN_act: 'relu'                    # Activation function: 'relu', 'tanh', 'sigmoid'. Rec: (relu)
+NN_epochs: 200                    # Number of epochs. If NN_early_stopping=True, then *High, otherwise *Bal. Rec: 200 (10, 1000)
+NN_batch_size: 32                 # Batch size: Higher values speed up training, but lower performance at some point. Best performance needs balancing. Rec: 32 (8, 256)
+NN_alpha: 0.0001                  # L2 penalty (regularization term) parameter. Increase to reduce overfitting. *Bal. Rec: 0.0001 (0.00001, 0.1)
+NN_early_stopping: True           # Whether to use early stopping to terminate training when validation score is not improving. Usually a good idea. Rec: (True)
+NN_validation_fraction: 0.1       # If NN_early_stopping=True: The proportion of training data for validation. *Bal. Rec: 0.1 (0.05, 0.2)
+
+# Gaussian Process (GP)
+# Critical:
+GP_alpha: 0.3                     # Expected noise/variance of the data. *Bal. (0.0000000001, 1)
+# Important:
+GP_length_scale: 1                # Length scale of the kernel. *Bal. (0.1, 10)
+GP_n_restarts_optimizer: 0        # Number of restarts of the optimizer for finding the kernel's parameters. *High. (0, 10)
+# Optional:
+GP_normalize_y: True              # Whether to standard scale the target. Should probably always be True. (True)
+
+
