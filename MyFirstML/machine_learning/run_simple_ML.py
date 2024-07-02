@@ -309,10 +309,10 @@ if __name__ == '__main__':
     # General
     experiment = 'Fukui_test'  # str: name of experiment for labeling the output directory and printing.
     random_seed = 666  # [int,None]: random seed for reproducibility. Set to None for non-deterministic results.
-    use_models = ['LogR', 'RFC', 'NNC', 'GPC']  # list: models to use out of ['1NN', 'LR', 'RF', 'XGB', 'NN', 'GP']
+    use_models = ['RFC']  # list: models to use out of ['1NN', 'LR', 'RF', 'XGB', 'NN', 'GP']
     reference_run = None#Path('..', '..', 'results', 'runs', 'results_0_test')  # Provide a path of a previous run directory to check for changes in output files. Incredibly useful for refactoring and writing code.
     # Cross validation
-    CV = 'LeaveOneOut'  # str: cross-validation method: 'KFold', 'Random', 'LeaveOneOut'
+    CV = 'TestMolecule=2-fluorobenzonitrile'  # str: cross-validation method: 'KFold', 'Random', 'LeaveOneOut'
     n_reps = 5  # int: number of repetitions for cross-validation (the K in Kfold or the number of repetitions for Random)
     trainfrac = 0.8  # float: fraction of data to use for training. Only used if CV == 'Random'
     group = 'molecule_name'  # [str,None]: grouping variable for cross-validation. None for no grouping.
@@ -334,9 +334,8 @@ if __name__ == '__main__':
 
     # Secondary options you will usually not need to change (but you can if you want to)
     hparams_file = 'hparams.yml'  # str: path to hyperparameters for models
-    outdir = Path('', '../..', 'results',
-                  'runs')  # directory for saving results, in which a new directory will be created for each run
-    shuffle = True      # bool: shuffle the data before splitting it into train and test set
+    outdir = Path('/Users/timosommer/PhD/projects/others/Manting_Fukui_indices/results/runs')  # directory for saving results, in which a new directory will be created for each run
+    shuffle = False      # bool: shuffle the data before splitting it into train and test set
     csv_headers = 1     # int: number of header rows in the csv file to skip when loading the data
 
     ###### END OF OPTIONS ######

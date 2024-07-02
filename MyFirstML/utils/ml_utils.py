@@ -112,6 +112,15 @@ def get_train_test_splits(df, CV, n_reps, trainfrac=None, group=None) -> Tuple[p
         else:
             groups = df[group].to_numpy()
             split = LeaveOneGroupOut().split(data_array, groups=groups)
+    elif CV.startswith('TestMolecule='):
+        molname = CV.split('=')[-1]
+        assert group in df.columns, f'Column name "{group}" not found in df.columns.'
+        test_indices = df[df[group] == molname].index
+        train_indices = df[df[group] != molname].index
+        split = [(train_indices, test_indices)]
+    else:
+        raise ValueError(f'Unknown cross-validation method "{CV}".')
+
 
     # Create a column in df for each CV split and fill it with either 'train' or 'test'.
     CV_cols = []
