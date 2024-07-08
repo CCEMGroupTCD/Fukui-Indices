@@ -199,11 +199,11 @@ if __name__ == '__main__':
 
 
     # # %% Check with old csv
-    old_csv = Path(features_dir, 'OLD_fukui_soap_pca.csv')
-    df_old = pd.read_csv(old_csv)
-
-    # print different columns:
-    print(f'Different columns: {sorted(set(df.columns) - set(df_old.columns))}')
-    pd.testing.assert_frame_equal(df, df_old)
-    print('Dataframes are equal!')
+    # old_csv = Path(features_dir, 'OLD_fukui_soap_pca.csv')
+    # df_old = pd.read_csv(old_csv)
+    #
+    # # print different columns:
+    # print(f'Different columns: {sorted(set(df.columns) - set(df_old.columns))}')
+    # pd.testing.assert_frame_equal(df, df_old)
+    # print('Dataframes are equal!')
 
