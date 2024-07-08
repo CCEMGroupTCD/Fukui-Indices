@@ -1,0 +1,61 @@
+TITLE      continue calc
+REMARK   1 File created by GaussView 6.0.16
+HETATM    1  C           0       2.234  -0.702  -0.186                       C
+HETATM    2  C           0       2.460   0.656   0.021                       C
+HETATM    3  C           0       4.801   0.267   0.045                       C
+HETATM    4  C           0       4.575  -1.095  -0.163                       C
+HETATM    5  C           0       3.278  -1.604  -0.282                       C
+HETATM    6  H           0       3.912   2.229   0.302                       H
+HETATM    7  H           0       5.819   0.629   0.133                       H
+HETATM    8  H           0       5.421  -1.770  -0.232                       H
+HETATM    9  H           0       3.101  -2.663  -0.443                       H
+HETATM   10  N           0       0.181   0.343  -0.124                       N
+HETATM   11  C           0       0.765  -0.920  -0.267                       C
+HETATM   12  C           0       1.141   1.340   0.078                       C
+HETATM   13  O           0       0.149  -1.954  -0.424                       O
+HETATM   14  O           0       0.891   2.514   0.259                       O
+HETATM   15  C           0      -1.240   0.591  -0.104                       C
+HETATM   16  C           0      -1.933   0.274  -1.428                       C
+HETATM   17  H           0      -1.359   1.661   0.108                       H
+HETATM   18  C           0      -3.424   0.563  -1.302                       C
+HETATM   19  H           0      -1.771  -0.775  -1.692                       H
+HETATM   20  H           0      -1.496   0.893  -2.214                       H
+HETATM   21  H           0      -3.969   0.273  -2.201                       H
+HETATM   22  H           0      -3.591   1.637  -1.147                       H
+HETATM   23  C           0      -1.882  -0.131   1.079                       C
+HETATM   24  C           0      -4.059  -0.139  -0.131                       C
+HETATM   25  O           0      -1.278  -0.411   2.098                       O
+HETATM   26  O           0      -5.237  -0.445  -0.075                       O
+HETATM   27  N           0      -3.227  -0.415   0.949                       N
+HETATM   28  H           0      -3.667  -0.863   1.749                       H
+HETATM   29 Si           0       3.738   1.170   0.140                      Si
+END
+CONECT    1    2    5   11
+CONECT    2    1   12   29
+CONECT    3    4    7   29
+CONECT    4    3    5    8
+CONECT    5    1    4    9
+CONECT    6   29
+CONECT    7    3
+CONECT    8    4
+CONECT    9    5
+CONECT   10   11   12   15
+CONECT   11    1   10   13
+CONECT   12    2   10   14
+CONECT   13   11
+CONECT   14   12
+CONECT   15   10   16   17   23
+CONECT   16   15   18   19   20
+CONECT   17   15
+CONECT   18   16   21   22   24
+CONECT   19   16
+CONECT   20   16
+CONECT   21   18
+CONECT   22   18
+CONECT   23   15   25   27
+CONECT   24   18   26   27
+CONECT   25   23
+CONECT   26   24
+CONECT   27   24   23   28
+CONECT   28   27
+CONECT   29    2    3    6

@@ -1,0 +1,17 @@
+experiment: all_models_uffpca20
+dataset: ../data/fukui_soap_pca.csv
+features: ['uffpca_0', 'uffpca_1', 'uffpca_2', 'uffpca_3', 'uffpca_4', 'uffpca_5', 'uffpca_6', 'uffpca_7', 'uffpca_8', 'uffpca_9', 'uffpca_10', 'uffpca_11', 'uffpca_12', 'uffpca_13', 'uffpca_14', 'uffpca_15', 'uffpca_16', 'uffpca_17', 'uffpca_18', 'uffpca_19']
+target: classifier_Selection
+CV: LeaveOneOut
+n_reps: 5
+trainfrac: 0.8
+group: molecule_name
+scores: ['Acc_group']
+outdir: ../data/ml_results
+hparams_file: hparams.yml
+use_data_frac: None
+xscaler: StandardScaler()
+yscaler: None
+random_seed: 1
+use_models: ['XGBC', 'RFC', 'LogR', 'NNC', 'GPC']
+runtype: proba_classification

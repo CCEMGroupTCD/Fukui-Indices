@@ -1,0 +1,26 @@
+COMPND    Lowest energy conformer (energy=16.1664)
+HETATM    1  F1  UNL     1      -2.524  -0.112   0.869  1.00  0.00           F  
+HETATM    2  C1  UNL     1      -1.812  -0.673  -0.177  1.00  0.00           C  
+HETATM    3  C2  UNL     1      -0.342  -0.337  -0.029  1.00  0.00           C  
+HETATM    4 SI1  UNL     1       0.615  -1.361   0.096  1.00  0.00          SI  
+HETATM    5  C3  UNL     1       1.966  -1.039   0.232  1.00  0.00           C  
+HETATM    6  N1  UNL     1       2.360   0.260   0.244  1.00  0.00           N  
+HETATM    7  C4  UNL     1       1.468   1.277   0.126  1.00  0.00           C  
+HETATM    8  C5  UNL     1       0.101   1.006  -0.012  1.00  0.00           C  
+HETATM    9  C6  UNL     1      -0.818   2.113  -0.135  1.00  0.00           C  
+HETATM   10  N2  UNL     1      -1.554   3.000  -0.234  1.00  0.00           N  
+HETATM   11  F2  UNL     1      -2.032  -2.040  -0.169  1.00  0.00           F  
+HETATM   12  F3  UNL     1      -2.286  -0.164  -1.372  1.00  0.00           F  
+HETATM   13  H1  UNL     1       0.328  -2.405   0.090  1.00  0.00           H  
+HETATM   14  H2  UNL     1       2.704  -1.824   0.329  1.00  0.00           H  
+HETATM   15  H3  UNL     1       1.827   2.299   0.141  1.00  0.00           H  
+CONECT    1    2
+CONECT    2    3   11   12
+CONECT    3    4    4    8
+CONECT    4    5   13
+CONECT    5    6    6   14
+CONECT    6    7
+CONECT    7    8    8   15
+CONECT    8    9
+CONECT    9   10   10   10
+END

@@ -1,6 +1,0 @@
-This directory contains the following toy datasets:
-- linear_toy_dataset.csv: a perfectly linear correlation between feature x1 and target y. n=100
-- sine2D_toy_dataset.csv: a 2D sine wave with features x1,x2 and target y. n=100
-- diabetes_toy_dataset.csv: a small real world dataset with features ['age', 'sex', 'bmi', 'bp', 's1', 's2', 's3', 's4', 's5', 's6'] and target 'target'. n=442
-- california_housing_toy_dataset.csv: a bigger real world dataset with features ['MedInc', 'HouseAge', 'AveRooms', 'AveBedrms', 'Population', 'AveOccup',
-       'Latitude', 'Longitude'] and target 'MedHouseVal'. n=20640

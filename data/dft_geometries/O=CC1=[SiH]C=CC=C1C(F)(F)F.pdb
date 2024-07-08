@@ -1,0 +1,37 @@
+TITLE      continue calc
+REMARK   1 File created by GaussView 6.0.16
+HETATM    1  C           0       0.252  -1.814  -0.000                       C
+HETATM    2  C           0      -0.121  -0.474   0.000                       C
+HETATM    3  H           0      -0.503  -2.592  -0.000                       H
+HETATM    4  H           0       2.962   0.943   0.000                       H
+HETATM    5  C           0       1.600  -2.163  -0.000                       C
+HETATM    6  H           0       1.879  -3.211  -0.000                       H
+HETATM    7  C           0       0.862   0.535   0.000                       C
+HETATM    8  C           0       2.579  -1.176   0.000                       C
+HETATM    9  H           0       3.629  -1.447   0.000                       H
+HETATM   10  C           0       0.536   1.987   0.001                       C
+HETATM   11  H           0      -0.527   2.273   0.003                       H
+HETATM   12  O           0       1.388   2.857  -0.001                       O
+HETATM   13  C           0      -1.591  -0.136  -0.000                       C
+HETATM   14  F           0      -2.377  -1.226  -0.001                       F
+HETATM   15  F           0      -1.950   0.594  -1.083                       F
+HETATM   16  F           0      -1.951   0.592   1.084                       F
+HETATM   17 Si           0       2.208   0.164   0.000                      Si
+END
+CONECT    1    2    3    5
+CONECT    2    1    7   13
+CONECT    3    1
+CONECT    4   17
+CONECT    5    1    6    8
+CONECT    6    5
+CONECT    7    2   10   17
+CONECT    8    5    9   17
+CONECT    9    8
+CONECT   10    7   11   12
+CONECT   11   10
+CONECT   12   10
+CONECT   13    2   14   15   16
+CONECT   14   13
+CONECT   15   13
+CONECT   16   13
+CONECT   17    4    7    8
