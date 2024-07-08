@@ -2,6 +2,7 @@
 This script has a simple setup of the most important steps for machine learning on tabular data. At the moment it is set up for regression, but can be easily adapted for classification.
 """
 import random
+import warnings
 from pathlib import Path
 from typing import List
 from datetime import datetime
@@ -18,10 +19,41 @@ from sklearn.gaussian_process.kernels import ConstantKernel, RBF
 from sklearn.ensemble import RandomForestRegressor, RandomForestClassifier
 from xgboost import XGBRegressor, XGBClassifier
 
-from MyFirstML.machine_learning.RunML import RunML
-from MyFirstML.utils.input_output import make_new_output_directory, write_to_yaml
-from MyFirstML.utils.ml_utils import load_data, get_hparams, get_train_test_splits
+from src.machine_learning.RunML import RunML
+from src.utils.input_output import make_new_output_directory, write_to_yaml
+from src.utils.ml_utils import load_data, get_hparams, get_train_test_splits
 
+def wrongly_predicted_groups(y_true:np.array, y_pred:np.array, group:np.array):
+    """
+    Same as the function below, but returns the groups that were wrongly predicted.
+    :return:
+    """
+    y_true = np.array(y_true)
+    y_pred = np.array(y_pred)
+    group = np.array(group)
+
+    groups = np.unique(group)
+    wrong_groups = []
+    wrong_site_probabilities = []
+    correct_sites_probabilities = []
+    for g in groups:
+        idx = group == g
+        y_true_g = y_true[idx]
+        y_pred_g = y_pred[idx]
+        max_true = y_true_g == np.max(y_true_g)
+        max_pred = y_pred_g == np.max(y_pred_g)
+        # Check if all predicted 1s are among the true 1s
+        correct_predicted = [true == True for true, pred in zip(max_true, max_pred) if pred == True]
+        if not all(correct_predicted):
+            wrong_groups.append(g)
+            # Probability of the wrongly predicted site
+            probability = np.max(y_pred_g) / np.sum(y_pred_g)
+            wrong_site_probabilities.append(probability)
+            # Probabilities of all sites which would be true but are not predicted
+            true_probs = tuple([pred/sum(y_pred_g) for pred, true in zip(y_pred_g, y_true_g) if true == 1])
+            correct_sites_probabilities.append(true_probs)
+
+    return wrong_groups, wrong_site_probabilities, correct_sites_probabilities
 
 # Self-implemented scores:
 def accuracy_of_highest_probability_in_group(y_true:np.array, y_pred:np.array, group:np.array):
@@ -94,11 +126,11 @@ def get_all_models(hparams: dict, n_features: int, use_models: List[str]) -> dic
     # Regressor
     if 'RF' in use_models:
         Random_Forest = RandomForestRegressor(
-                                                n_estimators=hparams['RF_n_estimators'],
-                                                max_depth=hparams['RF_max_depth'],
-                                                max_features=hparams['RF_max_features'],
-                                                min_samples_leaf=hparams['RF_min_samples_leaf'],
-                                                min_impurity_decrease=hparams['RF_min_impurity_decrease']
+                                                # n_estimators=hparams['RF_n_estimators'],
+                                                # max_depth=hparams['RF_max_depth'],
+                                                # max_features=hparams['RF_max_features'],
+                                                # min_samples_leaf=hparams['RF_min_samples_leaf'],
+                                                # min_impurity_decrease=hparams['RF_min_impurity_decrease']
                                                 )
         all_models['RF'] = Random_Forest
     # Classifier
@@ -118,18 +150,18 @@ def get_all_models(hparams: dict, n_features: int, use_models: List[str]) -> dic
     # Regressor
     if 'XGB' in use_models:
         XGBoost = XGBRegressor(
-                                n_estimators=hparams['XGB_n_estimators'],
-                                max_depth=hparams['XGB_max_depth'],
-                                learning_rate=hparams['XGB_learning_rate']
+                                # n_estimators=hparams['XGB_n_estimators'],
+                                # max_depth=hparams['XGB_max_depth'],
+                                # learning_rate=hparams['XGB_learning_rate']
                                 )
         all_models['XGB'] = XGBoost
 
     # Classifier
     if 'XGBC' in use_models:
         XGBoost = XGBClassifier(
-                                n_estimators=hparams['XGB_n_estimators'],
-                                max_depth=hparams['XGB_max_depth'],
-                                learning_rate=hparams['XGB_learning_rate']
+                                # n_estimators=hparams['XGB_n_estimators'],
+                                # max_depth=hparams['XGB_max_depth'],
+                                # learning_rate=hparams['XGB_learning_rate']
                                 )
         all_models['XGBC'] = XGBoost
 
@@ -139,15 +171,15 @@ def get_all_models(hparams: dict, n_features: int, use_models: List[str]) -> dic
     # Regressor
     if 'NN' in use_models:
         NN = MLPRegressor(
-                            hidden_layer_sizes=hparams['NN_hidden_layer_sizes'],
-                            activation=hparams['NN_act'],
-                            solver=hparams['NN_solver'],
-                            max_iter=hparams['NN_epochs'],
-                            early_stopping=hparams['NN_early_stopping'],
-                            validation_fraction=hparams['NN_validation_fraction'],
-                            alpha=hparams['NN_alpha'],
-                            batch_size=hparams['NN_batch_size'],
-                            learning_rate_init=hparams['NN_learning_rate'],
+                            # hidden_layer_sizes=hparams['NN_hidden_layer_sizes'],
+                            # activation=hparams['NN_act'],
+                            # solver=hparams['NN_solver'],
+                            # max_iter=hparams['NN_epochs'],
+                            # early_stopping=hparams['NN_early_stopping'],
+                            # validation_fraction=hparams['NN_validation_fraction'],
+                            # alpha=hparams['NN_alpha'],
+                            # batch_size=hparams['NN_batch_size'],
+                            # learning_rate_init=hparams['NN_learning_rate'],
                             )
         all_models['NN'] = NN
     # Classifier
@@ -170,18 +202,18 @@ def get_all_models(hparams: dict, n_features: int, use_models: List[str]) -> dic
     # Gaussian Processes are quite interesting models. On problems with very little data (tens to hundreds of data points) they often outperform other models, but they scale badly to larger data sizes. One very interesting property is that they have an inbuilt uncertainty estimate, which can be very useful. For larger data sizes, one can find implementations of Sparse Gaussian Processes by gpflow or GPyTorch, which are very fast and can also be used for very large data sizes.
     # Regressor
     if 'GP' in use_models:
-        lengthscales = np.full(n_features, hparams['GP_length_scale'])
-        kernel = ConstantKernel() * RBF(length_scale=lengthscales)      # The kernel is another hyperparameter to tune.
+        # lengthscales = np.full(n_features, hparams['GP_length_scale'])
+        # kernel = ConstantKernel() * RBF(length_scale=lengthscales)      # The kernel is another hyperparameter to tune.
         GP = sklearn.gaussian_process.GaussianProcessRegressor(
-                                                                kernel=kernel,
-                                                                alpha=hparams['GP_alpha'],
-                                                                normalize_y=hparams['GP_normalize_y']
+                                                                # kernel=kernel,
+                                                                # alpha=hparams['GP_alpha'],
+                                                                # normalize_y=hparams['GP_normalize_y']
                                                                 )
         all_models['GP'] = GP
     # Classifier
     if 'GPC' in use_models:
-        lengthscales = np.full(n_features, hparams['GP_length_scale'])
-        kernel = ConstantKernel() * RBF(length_scale=lengthscales)      # The kernel is another hyperparameter to tune.
+        # lengthscales = np.full(n_features, hparams['GP_length_scale'])
+        # kernel = ConstantKernel() * RBF(length_scale=lengthscales)      # The kernel is another hyperparameter to tune.
         GP = sklearn.gaussian_process.GaussianProcessClassifier(
                                                                 # kernel=kernel,
                                                                 )
@@ -208,7 +240,7 @@ def main(experiment, dataset, reference_run, features, target, CV, n_reps, train
     np.random.seed(random_seed)
 
     # Load hyperparameters from file
-    hparams = get_hparams(hparams_file=hparams_file)
+    hparams = {}#get_hparams(hparams_file=hparams_file) # Outcommented: This project uses only default hyperparameters.
 
     # Define models
     models = get_all_models(hparams=hparams, n_features=len(features), use_models=use_models)
@@ -231,7 +263,7 @@ def main(experiment, dataset, reference_run, features, target, CV, n_reps, train
     run_outdir = make_new_output_directory(rootdir=outdir, label=experiment)
 
     # Save hyperparameters to file in output directory
-    shutil.copy(str(hparams_file), str(run_outdir))
+    # shutil.copy(str(hparams_file), str(run_outdir))   # Outcommented: This project uses only default hyperparameters.
 
     # Save experiment settings to file in output directory
     write_to_yaml(
@@ -289,37 +321,29 @@ def main(experiment, dataset, reference_run, features, target, CV, n_reps, train
 
 if __name__ == '__main__':
 
-    # Define names of SOAP and PCA features
-    # SOAP features
-    labels = []
-    species = ['Si', 'H', 'C', 'N', 'F', 'Cl', 'Br', 'O', 'S']
-    for element in species:
-        i = 0
-        while i < 3024 / 9:
-            label = element + str(i)
-            labels.append(label)
-            i = i + 1
-    # PCA features
-    pclabels = [f'PC{i+1}' for i in range(132)]
+    # Define names of features
+    labels = [f'uffsoap_{i}' for i in range(2400)]            # SOAP features
+    # labels = [f'uffpca_{i}' for i in range(132)]              # PCA features
+    # labels = ['Hammett m', 'Hammett p', 'Hammett o py only']    # Hammett features
 
     ###### START OF OPTIONS ######
     # Please set these options to control the ML script.
 
-    # ========   Options for Manting's project   ========
+    # ========   Options for machine learning project   ========
     # General
-    experiment = 'Fukui_test'  # str: name of experiment for labeling the output directory and printing.
-    random_seed = 666  # [int,None]: random seed for reproducibility. Set to None for non-deterministic results.
-    use_models = ['RFC']  # list: models to use out of ['1NN', 'LR', 'RF', 'XGB', 'NN', 'GP']
+    experiment = 'test'  # str: name of experiment for labeling the output directory and printing.
+    random_seed = 1  # In this project we tried seeds [1, 2, 3, 4, 5] for XGBC.
+    use_models = ['XGBC', 'RFC', 'LogR', 'NNC', 'GPC']  # list: models to use out of ['1NN', '1NNC', 'LR', 'LogR', 'RF', 'RFC', 'XGB', 'XGBC', 'NN', 'NNC', 'GP', 'GPC'] (C at end means classifier)
     reference_run = None#Path('..', '..', 'results', 'runs', 'results_0_test')  # Provide a path of a previous run directory to check for changes in output files. Incredibly useful for refactoring and writing code.
     # Cross validation
-    CV = 'TestMolecule=2-fluorobenzonitrile'  # str: cross-validation method: 'KFold', 'Random', 'LeaveOneOut'
+    CV = 'LeaveOneOut'  # str: cross-validation method: 'KFold', 'Random', 'LeaveOneOut'
     n_reps = 5  # int: number of repetitions for cross-validation (the K in Kfold or the number of repetitions for Random)
     trainfrac = 0.8  # float: fraction of data to use for training. Only used if CV == 'Random'
     group = 'molecule_name'  # [str,None]: grouping variable for cross-validation. None for no grouping.
     # Data
-    dataset = Path('/Users/timosommer/PhD/projects/others/Manting_Fukui_indices/data/fukui_classifier_and_pca.csv')#Path('..', '..', 'data', 'toy_datasets', 'regression', 'diabetes_toy_dataset.csv')  # str: path to dataset
+    dataset = Path('..', 'data', 'fukui_soap_pca.csv')  # str: path to dataset
     use_data_frac = None  # [float,None]: desired fraction of data points in range (0,1) or None for using all data.
-    features = labels#['age', 'sex', 'bmi', 'bp', 's1', 's2', 's3', 's4', 's5', 's6']  # list: features to use
+    features = labels  # list: features to use
     target = 'classifier_Selection'  # str: target to predict
     xscaler = StandardScaler()  # scaler for scaling the input features before feeding into the model, None for no scaling
     yscaler = None#StandardScaler()  # scaler for scaling the input targets before feeding into the model, None for no scaling
@@ -333,10 +357,10 @@ if __name__ == '__main__':
     }
 
     # Secondary options you will usually not need to change (but you can if you want to)
-    hparams_file = 'hparams.yml'  # str: path to hyperparameters for models
-    outdir = Path('/Users/timosommer/PhD/projects/others/Manting_Fukui_indices/results/runs')  # directory for saving results, in which a new directory will be created for each run
-    shuffle = False      # bool: shuffle the data before splitting it into train and test set
-    csv_headers = 1     # int: number of header rows in the csv file to skip when loading the data
+    hparams_file = 'hparams.yml'  # Note: In this project, this functionality is outcommented and all hyperparameters are the default ones.
+    outdir = Path('..', 'data', 'ml_results')  # directory for saving results, in which a new directory will be created for each run
+    shuffle = True      # bool: shuffle the data before splitting it into train and test set
+    csv_headers = 0     # int: number of header rows in the csv file to skip when loading the data
 
     ###### END OF OPTIONS ######
 
@@ -364,6 +388,31 @@ if __name__ == '__main__':
                 shuffle=shuffle,
                 csv_headers=csv_headers,
                 )
+
+    #%% Print wrongly predicted molecules for each model
+    df = ml.df
+    for model in ml.models.keys():
+        wrong_smiles = []
+        wrong_probabilities = []
+        true_probabilities = []
+        for group in ml.df[ml.group_colname].unique().tolist():
+            df_group = df[df[ml.group_colname] == group]
+            cv = [cv for cv in ml.CV_cols if all(df_group[cv] == 'test')][0]
+            test_pred_col = f'pred_{ml.target}_{model}_{cv}'
+
+            y_true = df_group[ml.target]
+            y_pred = df_group[test_pred_col]
+            groups = df_group[ml.group_colname]
+            wrong_groups, wrong_pred_probs, true_probs = wrongly_predicted_groups(y_true, y_pred, groups)
+            wrong_smiles.extend(wrong_groups)
+            wrong_probabilities.extend(wrong_pred_probs)
+            true_probabilities.extend(true_probs)
+        n_wrong = len(wrong_smiles)
+        print(f'{n_wrong} wrong smiles for {model}:')
+        for smiles, pred, true in zip (wrong_smiles, wrong_probabilities, true_probabilities):
+            true = ', '.join(tuple([f'{num:.2f}' for num in true]))
+            print(f'{smiles}  -  Pred: {pred:.2f}, True: {true}')
+
 
 
 

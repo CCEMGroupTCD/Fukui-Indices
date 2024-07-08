@@ -13,8 +13,8 @@ import matplotlib.pyplot as plt
 import seaborn as sns
 from sklearn.exceptions import ConvergenceWarning
 
-from MyFirstML.utils.input_output import write_to_csv
-from MyFirstML.utils.utils import are_dir_trees_equal
+from src.utils.input_output import write_to_csv
+from src.utils.utils import are_dir_trees_equal
 
 warnings.simplefilter("ignore", category=ConvergenceWarning)
 warnings.simplefilter("ignore", category=FutureWarning)
