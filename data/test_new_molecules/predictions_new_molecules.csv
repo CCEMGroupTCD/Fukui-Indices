@@ -1,0 +1,16 @@
+smiles,molecule_name,pred_classifier_Selection_XGBC_CV_0
+[H]C(C1=CC=[SiH]C=C1Br)=O,2-bromobenzaldehyde,0.9848049
+[H]C(C1=CC=C[SiH]=C1Br)=O,2-bromobenzaldehyde,0.002295058
+[H]C(C1=[SiH]C=CC=C1Br)=O,2-bromobenzaldehyde,0.001687765
+[H]C(C1=C[SiH]=CC=C1Br)=O,2-bromobenzaldehyde,0.001600369
+ClC1=CC=C(F)C(C#N)=[SiH]1,5-chloro-2-fluorobenzonitrile,0.002615238
+ClC1=C[SiH]=C(F)C(C#N)=C1,5-chloro-2-fluorobenzonitrile,0.002015665
+ClC1=[SiH]C=C(F)C(C#N)=C1,5-chloro-2-fluorobenzonitrile,0.9968496
+O=C(OCC1=CC=CC=C1)C2=CC=[SiH]N=C2,benzyl nicotinate,0.98179513
+O=C(OCC1=CC=CC=C1)C2=CC=CN=[SiH]2,benzyl nicotinate,0.003381573
+O=C(OCC1=CC=CC=C1)C2=[SiH]C=CN=C2,benzyl nicotinate,0.01565493
+O=C(OCC1=CC=CC=C1)C2=C[SiH]=CN=C2,benzyl nicotinate,0.004458123
+N#CC1=CC=C[SiH]=C1C(OCC)=O,ethyl 2-cyanobenzoate,0.002438072
+N#CC1=C[SiH]=CC=C1C(OCC)=O,ethyl 2-cyanobenzoate,0.92469865
+N#CC1=[SiH]C=CC=C1C(OCC)=O,ethyl 2-cyanobenzoate,0.003313852
+N#CC1=CC=[SiH]C=C1C(OCC)=O,ethyl 2-cyanobenzoate,0.79260653

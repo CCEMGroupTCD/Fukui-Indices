@@ -1,0 +1,148 @@
+smiles,classifier_Selection,Fukui-DFT,molecule_name,CV_0
+N#CC1=[SiH]C=CC=C1C#N,0,0.021,phthalonitrile,train
+N#CC1=C[SiH]=CC=C1C#N,1,0.109,phthalonitrile,train
+N#CC1=[SiH]C=CC(C#N)=C1,1,0.188,isophthalonitrile,train
+N#CC1=C[SiH]=CC(C#N)=C1,0,-0.007,isophthalonitrile,train
+N#CC1=CC=CC(C#N)=[SiH]1,0,-0.001,isophthalonitrile,train
+N#CC1=[SiH]C=CC=C1C(F)(F)F,0,0.044,2-(trifluoromethyl)benzonitrile,train
+N#CC1=C[SiH]=CC=C1C(F)(F)F,0,0.059,2-(trifluoromethyl)benzonitrile,train
+N#CC1=CC=[SiH]C=C1C(F)(F)F,1,0.16,2-(trifluoromethyl)benzonitrile,train
+N#CC1=CC=C[SiH]=C1C(F)(F)F,0,-0.01,2-(trifluoromethyl)benzonitrile,train
+N#CC1=[SiH]C=CC=C1,0,0.081,benzonitrile,train
+N#CC1=C[SiH]=CC=C1,0,0.021,benzonitrile,train
+N#CC1=CC=[SiH]C=C1,1,0.175,benzonitrile,train
+FC1=CC=C[SiH]=C1C#N,0,0.127,2-fluorobenzonitrile,train
+FC1=CC=[SiH]C=C1C#N,0,0.01,2-fluorobenzonitrile,train
+FC1=C[SiH]=CC=C1C#N,1,0.187,2-fluorobenzonitrile,train
+FC1=[SiH]C=CC=C1C#N,0,0.047,2-fluorobenzonitrile,train
+FC1=CC(C#N)=[SiH]C=C1,0,0.066,3-fluorobenzonitrile,train
+FC1=CC(C#N)=C[SiH]=C1,0,0.035,3-fluorobenzonitrile,train
+FC1=CC(C#N)=CC=[SiH]1,1,0.177,3-fluorobenzonitrile,train
+FC1=[SiH]C(C#N)=CC=C1,0,0.111,3-fluorobenzonitrile,train
+O=CC1=[SiH]C=CC=C1,0,0.082,benzaldehyde,train
+O=CC1=C[SiH]=CC=C1,0,0.02,benzaldehyde,train
+O=CC1=CC=[SiH]C=C1,1,0.145,benzaldehyde,train
+O=CC1=CC=C[SiH]=C1,0,0.003,benzaldehyde,train
+O=CC1=CC=CC=[SiH]1,0,0.11,benzaldehyde,train
+O=CC1=[SiH]C=CC=C1F,0,0.118,2-fluorobenzaldehyde,train
+O=CC1=C[SiH]=CC=C1F,0,0.003,2-fluorobenzaldehyde,train
+O=CC1=CC=[SiH]C=C1F,1,0.147,2-fluorobenzaldehyde,train
+O=CC1=CC=C[SiH]=C1F,0,0.027,2-fluorobenzaldehyde,train
+O=C(C1=CC=CC=C1)C2=[SiH]C=CC=C2,0,0.037,benzophenone,train
+O=C(C1=CC=CC=C1)C2=C[SiH]=CC=C2,0,0.016,benzophenone,train
+O=C(C1=CC=CC=C1)C2=CC=[SiH]C=C2,1,0.063,benzophenone,train
+O=C(C1=CC=CC=C1)C2=CC=C[SiH]=C2,0,0.014,benzophenone,train
+O=C(C1=CC=CC=C1)C2=CC=CC=[SiH]2,0,0.03,benzophenone,train
+O=C(C1=CC=CC=[SiH]1)C2=CC=CC=C2,0,0.03,benzophenone,train
+O=C(C1=CC=C[SiH]=C1)C2=CC=CC=C2,0,0.015,benzophenone,train
+O=C(C1=CC=[SiH]C=C1)C2=CC=CC=C2,1,0.062,benzophenone,train
+O=C(C1=C[SiH]=CC=C1)C2=CC=CC=C2,0,0.01,benzophenone,train
+O=C(C1=[SiH]C=CC=C1)C2=CC=CC=C2,0,0.031,benzophenone,train
+O=C(OC)C1=[SiH]C=CC=C1C(OC)=O,0,0.027,dimethyl phthalate,train
+O=C(OC)C1=C[SiH]=CC=C1C(OC)=O,1,0.114,dimethyl phthalate,train
+O=C(OC)C1=CC=[SiH]C=C1C(OC)=O,1,0.137,dimethyl phthalate,train
+O=C(OC)C1=CC=C[SiH]=C1C(OC)=O,0,0.011,dimethyl phthalate,train
+O=C(OC)C1=[SiH]C(F)=CC=C1C#N,0,0.041,methyl 2-cyano-5-fluorobenzoate,train
+O=C(OC)C1=CC(F)=[SiH]C=C1C#N,1,0.131,methyl 2-cyano-5-fluorobenzoate,train
+O=C(OC)C1=CC(F)=C[SiH]=C1C#N,0,-0.008,methyl 2-cyano-5-fluorobenzoate,train
+O=CC1=[SiH]C=CC=C1C(F)(F)F,0,0.092,2-(trifluoromethyl)benzaldehyde,train
+O=CC1=C[SiH]=CC=C1C(F)(F)F,0,0.023,2-(trifluoromethyl)benzaldehyde,train
+O=CC1=CC=[SiH]C=C1C(F)(F)F,1,0.143,2-(trifluoromethyl)benzaldehyde,train
+O=CC1=CC=C[SiH]=C1C(F)(F)F,0,0.006,2-(trifluoromethyl)benzaldehyde,train
+N#CC1=NC=CC=[SiH]1,0,0.049,picolinonitrile,train
+N#CC1=NC=C[SiH]=C1,0,0.089,picolinonitrile,train
+N#CC1=NC=[SiH]C=C1,1,0.168,picolinonitrile,train
+N#CC1=N[SiH]=CC=C1,0,0.012,picolinonitrile,train
+N#CC1=[SiH]C=CN=C1,0,0.049,nicotinonitrile,train
+N#CC1=C[SiH]=CN=C1,0,0.001,nicotinonitrile,train
+N#CC1=CC=[SiH]N=C1,1,0.168,nicotinonitrile,train
+N#CC1=CC=CN=[SiH]1,0,0.012,nicotinonitrile,train
+FC1=[SiH]C=CN=C1C#N,0,0.119,3-fluoropicolinonitrile,train
+FC1=C[SiH]=CN=C1C#N,1,0.167,3-fluoropicolinonitrile,train
+FC1=CC=[SiH]N=C1C#N,0,0.029,3-fluoropicolinonitrile,train
+FC(C1=[SiH]C=NC=C1C#N)(F)F,0,-0.004,4-(trifluoromethyl)nicotinonitrile,train
+FC(C1=C[SiH]=NC=C1C#N)(F)F,1,0.183,4-(trifluoromethyl)nicotinonitrile,train
+FC(C1=CC=N[SiH]=C1C#N)(F)F,0,0,4-(trifluoromethyl)nicotinonitrile,train
+ClC1=NC=C[SiH]=C1C#N,0,0.136,2-chloronicotinonitrile,train
+ClC1=NC=[SiH]C=C1C#N,0,0.013,2-chloronicotinonitrile,train
+ClC1=N[SiH]=CC=C1C#N,1,0.21,2-chloronicotinonitrile,train
+BrC1=CC=[SiH]C(C#N)=N1,0,0.047,6-bromopicolinonitrile,train
+BrC1=C[SiH]=CC(C#N)=N1,0,0.099,6-bromopicolinonitrile,train
+BrC1=[SiH]C=CC(C#N)=N1,1,0.167,6-bromopicolinonitrile,train
+BrC1=[SiH]C=CN=C1C#N,0,0.071,3-bromopicolinonitrile,train
+BrC1=C[SiH]=CN=C1C#N,1,0.175,3-bromopicolinonitrile,train
+BrC1=CC=[SiH]N=C1C#N,0,0.015,3-bromopicolinonitrile,train
+FC(C1=[SiH]C=CN=C1)(F)F,0,0.233,3-(trifluoromethyl)pyridine,train
+FC(C1=C[SiH]=CN=C1)(F)F,0,0.001,3-(trifluoromethyl)pyridine,train
+FC(C1=CC=[SiH]N=C1)(F)F,1,0.19,3-(trifluoromethyl)pyridine,train
+FC(C1=CC=CN=[SiH]1)(F)F,0,0.008,3-(trifluoromethyl)pyridine,train
+FC(C1=NC(C(F)(F)F)=CC=[SiH]1)(F)F,0,0.04,"2,6-bis(trifluoromethyl)pyridine",train
+FC(C1=NC(C(F)(F)F)=C[SiH]=C1)(F)F,1,0.228,"2,6-bis(trifluoromethyl)pyridine",train
+FC(C1=NC(C(F)(F)F)=[SiH]C=C1)(F)F,0,0.034,"2,6-bis(trifluoromethyl)pyridine",train
+O=C(C)C1=NC=CC=[SiH]1,0,0.038,1-(pyridin-2-yl)ethan-1-one,train
+O=C(C)C1=NC=C[SiH]=C1,0,0.07,1-(pyridin-2-yl)ethan-1-one,train
+O=C(C)C1=NC=[SiH]C=C1,1,0.127,1-(pyridin-2-yl)ethan-1-one,train
+O=C(C)C1=N[SiH]=CC=C1,0,0.009,1-(pyridin-2-yl)ethan-1-one,train
+N#CC1=NC=C[SiH]=N1,0,0.032,pyrimidine-2-carbonitrile,train
+N#CC1=NC=[SiH]C=N1,1,0.181,pyrimidine-2-carbonitrile,train
+O=S(C1=NC=C[SiH]=N1)(C)=O,1,0.263,2-(methylsulfonyl)pyrimidine,train
+O=S(C1=NC=[SiH]C=N1)(C)=O,0,0.003,2-(methylsulfonyl)pyrimidine,train
+O=S(C1=N[SiH]=CC=N1)(C)=O,1,0.218,2-(methylsulfonyl)pyrimidine,train
+O=CC(C=C1)=CC=C1C2=CN=[SiH]N=C2,1,0.037,4-(pyrimidin-5-yl)benzaldehyde,train
+O=CC(C=C1)=CC=C1C2=CN=CN=[SiH]2,0,0.024,4-(pyrimidin-5-yl)benzaldehyde,train
+O=CC(C=[SiH]1)=CC=C1C2=CN=CN=C2,0,0.034,4-(pyrimidin-5-yl)benzaldehyde,train
+O=CC([SiH]=C1)=CC=C1C2=CN=CN=C2,0,0.026,4-(pyrimidin-5-yl)benzaldehyde,train
+O=CC(C=C1)=[SiH]C=C1C2=CN=CN=C2,0,0.048,4-(pyrimidin-5-yl)benzaldehyde,train
+O=CC(C=C1)=C[SiH]=C1C2=CN=CN=C2,0,0.013,4-(pyrimidin-5-yl)benzaldehyde,train
+O=CC(C=C1)=CC=C1C2=[SiH]N=CN=C2,0,0.023,4-(pyrimidin-5-yl)benzaldehyde,train
+O=CC1=NC=CC=[SiH]1,0,0.042,picolinaldehyde,train
+O=CC1=NC=C[SiH]=C1,0,0.036,picolinaldehyde,train
+O=CC1=NC=[SiH]C=C1,1,0.125,picolinaldehyde,train
+O=CC1=N[SiH]=CC=C1,0,0.005,picolinaldehyde,train
+O=C(OC)C1=NC=CC=[SiH]1,0,0.025,methyl picolinate,train
+O=C(OC)C1=NC=C[SiH]=C1,0,0.087,methyl picolinate,train
+O=C(OC)C1=NC=[SiH]C=C1,1,0.158,methyl picolinate,train
+O=C(OC)C1=N[SiH]=CC=C1,0,0.01,methyl picolinate,train
+O=C(N)C1=NC=CC=[SiH]1,0,0.001,picolinamide,train
+O=C(N)C1=NC=C[SiH]=C1,0,0.112,picolinamide,train
+O=C(N)C1=NC=[SiH]C=C1,1,0.151,picolinamide,train
+O=C(N)C1=N[SiH]=CC=C1,0,0.005,picolinamide,train
+ClC1=N[SiH]=CC=C1C(NC2=C(C3=CC=C(Cl)C=C3)C=CC=C2)=O,1,0.218,"2-chloro-N-(4'-chloro-[1,1'-biphenyl]-2-yl)nicotinamide",train
+ClC1=NC=[SiH]C=C1C(NC2=C(C3=CC=C(Cl)C=C3)C=CC=C2)=O,0,0.001,"2-chloro-N-(4'-chloro-[1,1'-biphenyl]-2-yl)nicotinamide",train
+ClC1=NC=C[SiH]=C1C(NC2=C(C3=CC=C(Cl)C=C3)C=CC=C2)=O,0,0.222,"2-chloro-N-(4'-chloro-[1,1'-biphenyl]-2-yl)nicotinamide",train
+ClC1=NC=CC=C1C(NC2=C(C3=CC=C(Cl)C=C3)C=CC=[SiH]2)=O,0,-0.023,"2-chloro-N-(4'-chloro-[1,1'-biphenyl]-2-yl)nicotinamide",train
+ClC1=NC=CC=C1C(NC2=C(C3=CC=C(Cl)C=C3)C=C[SiH]=C2)=O,0,0.006,"2-chloro-N-(4'-chloro-[1,1'-biphenyl]-2-yl)nicotinamide",train
+ClC1=NC=CC=C1C(NC2=C(C3=CC=C(Cl)C=C3)C=[SiH]C=C2)=O,0,-0.008,"2-chloro-N-(4'-chloro-[1,1'-biphenyl]-2-yl)nicotinamide",train
+ClC1=NC=CC=C1C(NC2=C(C3=CC=C(Cl)C=C3)[SiH]=CC=C2)=O,0,0.003,"2-chloro-N-(4'-chloro-[1,1'-biphenyl]-2-yl)nicotinamide",train
+ClC1=NC=CC=C1C(NC2=C(C3=CC=C(Cl)C=[SiH]3)C=CC=C2)=O,0,-0.004,"2-chloro-N-(4'-chloro-[1,1'-biphenyl]-2-yl)nicotinamide",train
+ClC1=NC=CC=C1C(NC2=C(C3=CC=C(Cl)[SiH]=C3)C=CC=C2)=O,0,0.006,"2-chloro-N-(4'-chloro-[1,1'-biphenyl]-2-yl)nicotinamide",train
+ClC1=NC=CC=C1C(NC2=C(C3=C[SiH]=C(Cl)C=C3)C=CC=C2)=O,0,0.005,"2-chloro-N-(4'-chloro-[1,1'-biphenyl]-2-yl)nicotinamide",train
+ClC1=NC=CC=C1C(NC2=C(C3=[SiH]C=C(Cl)C=C3)C=CC=C2)=O,0,-0.006,"2-chloro-N-(4'-chloro-[1,1'-biphenyl]-2-yl)nicotinamide",train
+O=C1NC2=C(N=CC=C2C)N(C3CC3)C4=C1[SiH]=CC=N4,0,0.131,"11-cyclopropyl-4-methyl-5,11-dihydro-6H-dipyrido[3,2-b:2',3'-e][1,4]diazepin-6-one",train
+O=C1NC2=C(N=CC=C2C)N(C3CC3)C4=C1C=[SiH]C=N4,0,0.051,"11-cyclopropyl-4-methyl-5,11-dihydro-6H-dipyrido[3,2-b:2',3'-e][1,4]diazepin-6-one",train
+O=C1NC2=C(N=CC=C2C)N(C3CC3)C4=C1C=C[SiH]=N4,1,0.142,"11-cyclopropyl-4-methyl-5,11-dihydro-6H-dipyrido[3,2-b:2',3'-e][1,4]diazepin-6-one",train
+O=C1NC2=C(N=C[SiH]=C2C)N(C3CC3)C4=C1C=CC=N4,0,0.012,"11-cyclopropyl-4-methyl-5,11-dihydro-6H-dipyrido[3,2-b:2',3'-e][1,4]diazepin-6-one",train
+O=C1NC2=C(N=[SiH]C=C2C)N(C3CC3)C4=C1C=CC=N4,0,0.027,"11-cyclopropyl-4-methyl-5,11-dihydro-6H-dipyrido[3,2-b:2',3'-e][1,4]diazepin-6-one",train
+O=C1C(CC)=C(C)C(C2=CC=C[SiH]=C21)=O,0,0.028,"2-ethyl-3-methylnaphthalene-1,4-dione",train
+O=C1C(CC)=C(C)C(C2=CC=[SiH]C=C21)=O,0,0.039,"2-ethyl-3-methylnaphthalene-1,4-dione",train
+O=C1C(CC)=C(C)C(C2=C[SiH]=CC=C21)=O,1,0.041,"2-ethyl-3-methylnaphthalene-1,4-dione",train
+O=C1C(CC)=C(C)C(C2=[SiH]C=CC=C21)=O,0,0.007,"2-ethyl-3-methylnaphthalene-1,4-dione",train
+O=C1N(C(C2=CC=C[SiH]=C21)=O)C3C(NC(CC3)=O)=O,0,0.037,"2-(2,6-dioxopiperidin-3-yl)isoindoline-1,3-dione",train
+O=C1N(C(C2=CC=[SiH]C=C21)=O)C3C(NC(CC3)=O)=O,1,0.092,"2-(2,6-dioxopiperidin-3-yl)isoindoline-1,3-dione",train
+O=C1N(C(C2=C[SiH]=CC=C21)=O)C3C(NC(CC3)=O)=O,1,0.096,"2-(2,6-dioxopiperidin-3-yl)isoindoline-1,3-dione",train
+O=C1N(C(C2=[SiH]C=CC=C21)=O)C3C(NC(CC3)=O)=O,0,0.034,"2-(2,6-dioxopiperidin-3-yl)isoindoline-1,3-dione",train
+ClC1=CC=C(F)C(C#N)=[SiH]1,0,0,5-chloro-2-fluorobenzonitrile,test
+ClC1=[SiH]C=C(F)C(C#N)=C1,0,0,5-chloro-2-fluorobenzonitrile,test
+ClC1=C[SiH]=C(F)C(C#N)=C1,0,0,5-chloro-2-fluorobenzonitrile,test
+N#CC1=[SiH]C=CC=C1C(OCC)=O,0,0,ethyl 2-cyanobenzoate,test
+N#CC1=C[SiH]=CC=C1C(OCC)=O,0,0,ethyl 2-cyanobenzoate,test
+N#CC1=CC=[SiH]C=C1C(OCC)=O,0,0,ethyl 2-cyanobenzoate,test
+N#CC1=CC=C[SiH]=C1C(OCC)=O,0,0,ethyl 2-cyanobenzoate,test
+O=C(OCC1=CC=CC=C1)C2=[SiH]C=CN=C2,0,0,benzyl nicotinate,test
+O=C(OCC1=CC=CC=C1)C2=C[SiH]=CN=C2,0,0,benzyl nicotinate,test
+O=C(OCC1=CC=CC=C1)C2=CC=[SiH]N=C2,0,0,benzyl nicotinate,test
+O=C(OCC1=CC=CC=C1)C2=CC=CN=[SiH]2,0,0,benzyl nicotinate,test
+[H]C(C1=[SiH]C=CC=C1Br)=O,0,0,2-bromobenzaldehyde,test
+[H]C(C1=C[SiH]=CC=C1Br)=O,0,0,2-bromobenzaldehyde,test
+[H]C(C1=CC=[SiH]C=C1Br)=O,0,0,2-bromobenzaldehyde,test
+[H]C(C1=CC=C[SiH]=C1Br)=O,0,0,2-bromobenzaldehyde,test
