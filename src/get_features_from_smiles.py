@@ -117,12 +117,19 @@ def get_dft_atoms(smiles_list, dft_dir):
 
 if __name__ == '__main__':
 
-    features_dir = Path('..', 'data')
-    uff_dir = Path('..', 'data', 'uff_geometries')
-    dft_dir = Path('..', 'data', 'dft_geometries')
-
+    # Set up paths
+    features_dir = Path('..', 'data', 'generate_features')
+    uff_dir = Path(features_dir, 'uff_geometries')
+    dft_dir = Path(features_dir, 'dft_geometries')
+    # Set up input and output csv files
     input_csv = Path(features_dir, 'fukui.csv')
     output_csv = Path(features_dir, 'fukui_soap_pca.csv')
+    # If only_uff=True, ignore DFT structures and only use UFF structures. Used for testing completely new molecules.
+    only_uff = False
+
+
+
+
 
 
 
@@ -144,7 +151,8 @@ if __name__ == '__main__':
     uff_atoms, uff_atoms_index = smiles_to_structures(smiles_list, output_dir=uff_dir, num_conformers=10)
 
     # Read in DFT structures from .pdb files
-    dft_atoms, dft_atoms_index = get_dft_atoms(smiles_list, dft_dir)
+    if not only_uff:
+        dft_atoms, dft_atoms_index = get_dft_atoms(smiles_list, dft_dir)
 
     # Calculate SOAP features for uff and dft structures
     species = ['H', 'C', 'N', 'F', 'Cl', 'Br', 'O', 'S']
@@ -161,23 +169,28 @@ if __name__ == '__main__':
     uff_soap_features = uff_soap_features.reshape(len(uff_soap_features), -1)
     uff_soap_labels = [f'uffsoap_{i}' for i in range(uff_soap_features.shape[1])]
     uff_soap_df = pd.DataFrame(uff_soap_features, columns=uff_soap_labels)
-    # DFT structures
-    dft_soap_features = soap.create(dft_atoms, centers=dft_atoms_index)
-    dft_soap_features = dft_soap_features.reshape(len(dft_soap_features), -1)
-    dft_soap_labels = [f'dftsoap_{i}' for i in range(dft_soap_features.shape[1])]
-    dft_soap_df = pd.DataFrame(dft_soap_features, columns=dft_soap_labels)
     # Append SOAP features to df
-    df = pd.concat([df, uff_soap_df, dft_soap_df], axis=1)
+    df = pd.concat([df, uff_soap_df], axis=1)
+    # DFT structures
+    if not only_uff:
+        dft_soap_features = soap.create(dft_atoms, centers=dft_atoms_index)
+        dft_soap_features = dft_soap_features.reshape(len(dft_soap_features), -1)
+        dft_soap_labels = [f'dftsoap_{i}' for i in range(dft_soap_features.shape[1])]
+        dft_soap_df = pd.DataFrame(dft_soap_features, columns=dft_soap_labels)
+    # Append SOAP features to df
+    df = pd.concat([df, dft_soap_df], axis=1)
 
     # Do PCA of SOAP features and append to df
     pca = PCA(whiten=True)
     # UFF
     uff_principal_components = pca.fit_transform(df[uff_soap_labels].to_numpy())
     uff_df_pca = pd.DataFrame(uff_principal_components, columns=[f'uffpca_{i}' for i in range(uff_principal_components.shape[1])])
+    df = pd.concat([df, uff_df_pca], axis=1)
     # DFT
-    dft_principal_components = pca.fit_transform(df[dft_soap_labels].to_numpy())
-    dft_df_pca = pd.DataFrame(dft_principal_components, columns=[f'dftpca_{i}' for i in range(dft_principal_components.shape[1])])
-    df = pd.concat([df, uff_df_pca, dft_df_pca], axis=1)
+    if not only_uff:
+        dft_principal_components = pca.fit_transform(df[dft_soap_labels].to_numpy())
+        dft_df_pca = pd.DataFrame(dft_principal_components, columns=[f'dftpca_{i}' for i in range(dft_principal_components.shape[1])])
+        df = pd.concat([df, dft_df_pca], axis=1)
 
     # Save the dataframe
     df.to_csv(output_csv, index=False)
@@ -186,7 +199,7 @@ if __name__ == '__main__':
 
 
     # # %% Check with old csv
-    old_csv = '/Users/timosommer/PhD/projects/others/Manting_Fukui_indices/data/OLD_fukui_soap_pca.csv'
+    old_csv = Path(features_dir, 'OLD_fukui_soap_pca.csv')
     df_old = pd.read_csv(old_csv)
 
     # print different columns:

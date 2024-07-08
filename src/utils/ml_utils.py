@@ -106,6 +106,7 @@ def get_train_test_splits(df, CV, n_reps, trainfrac=None, group=None) -> Tuple[p
         else:
             groups = df[group].to_numpy()
             split = GroupShuffleSplit(train_size=trainfrac, n_splits=n_reps).split(data_array, groups=groups)
+
     elif CV == 'LeaveOneOut':
         if group is None:
             split = LeaveOneOut().split(data_array)
@@ -118,6 +119,10 @@ def get_train_test_splits(df, CV, n_reps, trainfrac=None, group=None) -> Tuple[p
         test_indices = df[df[group] == molname].index
         train_indices = df[df[group] != molname].index
         split = [(train_indices, test_indices)]
+    elif CV == 'AsFile':
+        # This means that the input csv already contains a column with the CV split.
+        CV_cols = [col for col in df.columns if col.startswith('CV_')]
+        return (df, CV_cols)
     else:
         raise ValueError(f'Unknown cross-validation method "{CV}".')
 

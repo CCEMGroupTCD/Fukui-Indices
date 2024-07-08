@@ -333,20 +333,20 @@ if __name__ == '__main__':
     # General
     experiment = 'test'  # str: name of experiment for labeling the output directory and printing.
     random_seed = 1  # In this project we tried seeds [1, 2, 3, 4, 5] for XGBC.
-    use_models = ['XGBC', 'RFC', 'LogR', 'NNC', 'GPC']  # list: models to use out of ['1NN', '1NNC', 'LR', 'LogR', 'RF', 'RFC', 'XGB', 'XGBC', 'NN', 'NNC', 'GP', 'GPC'] (C at end means classifier)
-    reference_run = None#Path('..', '..', 'results', 'runs', 'results_0_test')  # Provide a path of a previous run directory to check for changes in output files. Incredibly useful for refactoring and writing code.
+    use_models = ['XGBC']  # list: models to use out of ['LogR', 'RFC', 'XGBC', 'NNC', 'GPC']
+    reference_run = None  # [str,None]: reference run to compare the output to. None for no comparison.
     # Cross validation
-    CV = 'LeaveOneOut'  # str: cross-validation method: 'KFold', 'Random', 'LeaveOneOut'
+    CV = 'LeaveOneOut'  # str: cross-validation method: 'KFold', 'Random', 'LeaveOneOut', 'TestMolecule=molecule_name', 'AsFile'
     n_reps = 5  # int: number of repetitions for cross-validation (the K in Kfold or the number of repetitions for Random)
     trainfrac = 0.8  # float: fraction of data to use for training. Only used if CV == 'Random'
     group = 'molecule_name'  # [str,None]: grouping variable for cross-validation. None for no grouping.
     # Data
-    dataset = Path('..', 'data', 'fukui_soap_pca.csv')  # str: path to dataset
+    dataset = Path('..', 'data','generate_features', 'fukui_soap_pca.csv')  # str: path to dataset
     use_data_frac = None  # [float,None]: desired fraction of data points in range (0,1) or None for using all data.
     features = labels  # list: features to use
-    target = 'classifier_Selection'  # str: target to predict
-    xscaler = StandardScaler()  # scaler for scaling the input features before feeding into the model, None for no scaling
-    yscaler = None#StandardScaler()  # scaler for scaling the input targets before feeding into the model, None for no scaling
+    target = 'classifier_Selection' # str: target to predict
+    xscaler = StandardScaler()      # scaler for scaling the input features before feeding into the model, None for no scaling
+    yscaler = None                  # scaler for scaling the input targets before feeding into the model, None for no scaling
     runtype = 'proba_classification'    # str: type of run, either 'regression', 'classification', 'proba_classification'
     scores = {  # dict: scores to use for evaluation of models. Self-implemented scores need to have the signature score(y_true, y_pred) and can optionally have an attribute `group` as well.
         # 'r2': sklearn.metrics.r2_score,
@@ -391,22 +391,27 @@ if __name__ == '__main__':
 
     #%% Print wrongly predicted molecules for each model
     df = ml.df
+    feature_cols = [col for col in df.columns if 'soap' in col or 'pca' in col]
+    df_reduced = df.drop(columns=feature_cols) # Drop feature columns to make the df more readable
     for model in ml.models.keys():
         wrong_smiles = []
         wrong_probabilities = []
         true_probabilities = []
-        for group in ml.df[ml.group_colname].unique().tolist():
-            df_group = df[df[ml.group_colname] == group]
-            cv = [cv for cv in ml.CV_cols if all(df_group[cv] == 'test')][0]
-            test_pred_col = f'pred_{ml.target}_{model}_{cv}'
+        for cv in ml.CV_cols:
+            df_cv = df_reduced[df_reduced[cv] == 'test']
+            groups = [g for g in df_cv[group].unique()]
+            for g in groups:
+                df_group = df_reduced[df_reduced[ml.group_colname] == g]
+                # cv = [cv for cv in ml.CV_cols if all(df_group[cv] == 'test')][0]
+                test_pred_col = f'pred_{ml.target}_{model}_{cv}'
 
-            y_true = df_group[ml.target]
-            y_pred = df_group[test_pred_col]
-            groups = df_group[ml.group_colname]
-            wrong_groups, wrong_pred_probs, true_probs = wrongly_predicted_groups(y_true, y_pred, groups)
-            wrong_smiles.extend(wrong_groups)
-            wrong_probabilities.extend(wrong_pred_probs)
-            true_probabilities.extend(true_probs)
+                y_true = df_group[ml.target]
+                y_pred = df_group[test_pred_col]
+                groups = df_group[ml.group_colname]
+                wrong_groups, wrong_pred_probs, true_probs = wrongly_predicted_groups(y_true, y_pred, groups)
+                wrong_smiles.extend(wrong_groups)
+                wrong_probabilities.extend(wrong_pred_probs)
+                true_probabilities.extend(true_probs)
         n_wrong = len(wrong_smiles)
         print(f'{n_wrong} wrong smiles for {model}:')
         for smiles, pred, true in zip (wrong_smiles, wrong_probabilities, true_probabilities):
