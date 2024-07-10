@@ -18,3 +18,5 @@ Data is contained in the ``data`` directory. This directory contains three subdi
 - ``test_new_molecules``: Contains the same csv files, but with additional 4 molecules that were tested at a later stage of the project.
 - ``ml_results``: Contains the results of the machine learning models. The file ``ml_results.xlsx`` in the main directory contains an overview of these machine learning experiments.
 
+## License
+This project is licensed under the MIT License - see the [LICENSE](LICENSE) file for details. 
