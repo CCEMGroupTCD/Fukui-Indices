@@ -1,8 +1,20 @@
-# Fukui Index Prediction and Selectivity Classification
-This repo is for a project together with Manting and her experimental collaborator. We are predicting the Fukui indices via regression and classifying whether a certain atomic site is the one with the highest Fukui index/selectivity or not. 
-Main aspects are:
-    - SOAP features
-        - RF classifier works best with full SOAP features
-        - PCA does not improve performance
-    - Predict classifier probability:
-        - Because we predict individual atomic sites, we are predicting the probability of this site to be the one with the highest Fukui index/selectivity using a classifier and the predict_proba() method. That way, we can later calculate the score of the model by comparing if the predicted site is the one with the highest Fukui index/selectivity. This is implemented in this code in the function accuracy_of_highest_probability_in_group().
+# Prediction of selectivity and Fukui indices
+
+This is the repository for the paper XXXXXXXXXXX.
+
+It is used for predicting which atomic site in an organic molecule is the one with the highest activity. 
+
+## Machine Learning
+We trained machine learning classifiers on predicting the most active site. To check which active site is predicted, we used the predict_proba() method of the classifier to output the probability, instead of just the predicted class. Then, for all atomic sites in a molecule, the site with the highest probability was selected as the predicted active site. In order to get a fair estimate of the model comparison, we also used a leave-one-molecule-out cross-validation.
+
+### Scripts
+There are two main scripts in this repository:
+- ``src/get_features_from_smiles.py``: Generates SOAP features from SMILES strings and optionally from DFT structures as well. The input is a csv file with SMILES strings, the output is a csv file in which additionally to all original columns the SOAP features and PCA-compressed SOAP features are added.
+- ``src/run_simple_ML.py``: Runs machine learning models on the csv file with SOAP features. The options are explained in the script.
+
+### Data
+Data is contained in the ``data`` directory. This directory contains three subdirectories:
+- ``generate_features``: Contains the original csv file with SMILES string and the generated csv file with SOAP features.
+- ``test_new_molecules``: Contains the same csv files, but with additional 4 molecules that were tested at a later stage of the project.
+- ``ml_results``: Contains the results of the machine learning models. The file ``ml_results.xlsx`` in the main directory contains an overview of these machine learning experiments.
+
