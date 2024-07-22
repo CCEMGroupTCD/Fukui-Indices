@@ -238,11 +238,10 @@ class RunML(object):
         # Scale the features and targets. Fit the scaler only on the training data to prevent data leakage.
         if self.init_x_scaler is not None:
             self.x_scaler = deepcopy(self.init_x_scaler).fit(X_train)
-        if self.init_y_scaler is not None:
-            self.y_scaler = deepcopy(self.init_y_scaler).fit(y_train.reshape(-1, 1))
-
             X_train = self.x_scaler.transform(X_train)
             X_test = self.x_scaler.transform(X_test)
+        if self.init_y_scaler is not None:
+            self.y_scaler = deepcopy(self.init_y_scaler).fit(y_train.reshape(-1, 1))
             y_train = self.y_scaler.transform(y_train.reshape(-1, 1)).ravel()
 
         # Fit the model.

@@ -1,5 +1,5 @@
-experiment: hammett
-dataset: ../data/fukui_soap_pca.csv
+experiment: Hammett
+dataset: ../data/generate_features/fukui_soap_pca.csv
 features: ['Hammett m', 'Hammett p', 'Hammett o py only']
 target: classifier_Selection
 CV: LeaveOneOut

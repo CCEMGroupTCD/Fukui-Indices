@@ -322,8 +322,8 @@ def main(experiment, dataset, reference_run, features, target, CV, n_reps, train
 if __name__ == '__main__':
 
     # Define names of features
-    labels = [f'uffsoap_{i}' for i in range(2400)]            # SOAP features
-    # labels = [f'uffpca_{i}' for i in range(132)]              # PCA features
+    # labels = [f'dftsoap_{i}' for i in range(2400)]            # SOAP features
+    labels = [f'dftpca_{i}' for i in range(132)]              # PCA features
     # labels = ['Hammett m', 'Hammett p', 'Hammett o py only']    # Hammett features
 
     ###### START OF OPTIONS ######
@@ -331,32 +331,28 @@ if __name__ == '__main__':
 
     # ========   Options for machine learning project   ========
     # General
-    experiment = 'test'  # str: name of experiment for labeling the output directory and printing.
+    experiment = 'all_models_dftpca132'  # str: name of experiment for labeling the output directory and printing.
     random_seed = 1  # In this project we tried seeds [1, 2, 3, 4, 5] for XGBC.
-    use_models = ['XGBC']  # list: models to use out of ['LogR', 'RFC', 'XGBC', 'NNC', 'GPC']
-    reference_run = None  # [str,None]: reference run to compare the output to. None for no comparison.
+    use_models = ['XGBC', 'RFC', 'LogR', 'NNC', 'GPC']  # list: models to use out of ['XGBC', 'RFC', 'LogR', 'NNC', 'GPC']
     # Cross validation
     CV = 'LeaveOneOut'  # str: cross-validation method: 'KFold', 'Random', 'LeaveOneOut', 'TestMolecule=molecule_name', 'AsFile'
-    n_reps = 5  # int: number of repetitions for cross-validation (the K in Kfold or the number of repetitions for Random)
-    trainfrac = 0.8  # float: fraction of data to use for training. Only used if CV == 'Random'
     group = 'molecule_name'  # [str,None]: grouping variable for cross-validation. None for no grouping.
     # Data
     dataset = Path('..', 'data','generate_features', 'fukui_soap_pca.csv')  # str: path to dataset
-    use_data_frac = None  # [float,None]: desired fraction of data points in range (0,1) or None for using all data.
     features = labels  # list: features to use
     target = 'classifier_Selection' # str: target to predict
     xscaler = StandardScaler()      # scaler for scaling the input features before feeding into the model, None for no scaling
     yscaler = None                  # scaler for scaling the input targets before feeding into the model, None for no scaling
     runtype = 'proba_classification'    # str: type of run, either 'regression', 'classification', 'proba_classification'
     scores = {  # dict: scores to use for evaluation of models. Self-implemented scores need to have the signature score(y_true, y_pred) and can optionally have an attribute `group` as well.
-        # 'r2': sklearn.metrics.r2_score,
-        # 'MAE': sklearn.metrics.mean_absolute_error,
-        # 'Acc': sklearn.metrics.accuracy_score,
         'Acc_group': accuracy_of_highest_probability_in_group,
-        # 'MSE': sklearn.metrics.mean_squared_error,
     }
 
-    # Secondary options you will usually not need to change (but you can if you want to)
+    # Keep these options unchanged.
+    reference_run = None  # [str,None]: reference run to compare the output to. None for no comparison.
+    n_reps = 5  # int: number of repetitions for cross-validation (the K in Kfold or the number of repetitions for Random)
+    trainfrac = 0.8  # float: fraction of data to use for training. Only used if CV == 'Random'
+    use_data_frac = None  # [float,None]: desired fraction of data points in range (0,1) or None for using all data.
     hparams_file = 'hparams.yml'  # Note: In this project, this functionality is outcommented and all hyperparameters are the default ones.
     outdir = Path('..', 'data', 'ml_results')  # directory for saving results, in which a new directory will be created for each run
     shuffle = True      # bool: shuffle the data before splitting it into train and test set

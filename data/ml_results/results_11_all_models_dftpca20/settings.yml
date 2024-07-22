@@ -1,5 +1,5 @@
 experiment: all_models_dftpca20
-dataset: ../data/fukui_soap_pca.csv
+dataset: ../data/generate_features/fukui_soap_pca.csv
 features: ['dftpca_0', 'dftpca_1', 'dftpca_2', 'dftpca_3', 'dftpca_4', 'dftpca_5', 'dftpca_6', 'dftpca_7', 'dftpca_8', 'dftpca_9', 'dftpca_10', 'dftpca_11', 'dftpca_12', 'dftpca_13', 'dftpca_14', 'dftpca_15', 'dftpca_16', 'dftpca_17', 'dftpca_18', 'dftpca_19']
 target: classifier_Selection
 CV: LeaveOneOut
