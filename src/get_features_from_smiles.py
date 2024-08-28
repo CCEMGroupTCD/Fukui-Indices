@@ -117,21 +117,35 @@ def get_dft_atoms(smiles_list, dft_dir):
 
 if __name__ == '__main__':
 
+    # Users: only change this variable. This switches between the original training set and the 4 new molecules.
+    training = 'initial'    # either 'initial' or 'new_molecules'
+
+
+
+    #############  SET UP PATHS AUTOMATICALLY  #############
+
+    # Paths are set up automatically based on `training`
+    assert training in ['initial', 'new_molecules'], f'Invalid training set. Expected "initial" or "new_molecules", got "{training}".'
     # Set up paths
-    features_dir = Path('..', 'data', 'generate_features')
+    if training == 'initial':
+        features_dir = Path('..', 'data', 'generate_features')
+    else:
+        features_dir = Path('..', 'data', 'test_new_molecules')
+
     uff_dir = Path(features_dir, 'uff_geometries')
     dft_dir = Path(features_dir, 'dft_geometries')
     # Set up input and output csv files
-    input_csv = Path(features_dir, 'fukui.csv')
-    output_csv = Path(features_dir, 'fukui_soap_pca.csv')
+    if training == 'initial':
+        input_csv = Path(features_dir, 'fukui.csv')
+        output_csv = Path(features_dir, 'fukui_soap_pca.csv')
+    else:
+        input_csv = Path(features_dir, 'fukui_test_new_molecules.csv')
+        output_csv = Path(features_dir, 'fukui_test_new_molecules_soap_pca.csv')
     # If only_uff=True, ignore DFT structures and only use UFF structures. Used for testing completely new molecules.
-    only_uff = False
+    only_uff = True if training == 'new_molecules' else False
 
 
-
-
-
-
+    #############  MAIN FUNCTION  #############
 
     # Set random seeds for deterministic results. Probably not needed but just in case.
     random.seed(42)
@@ -177,8 +191,8 @@ if __name__ == '__main__':
         dft_soap_features = dft_soap_features.reshape(len(dft_soap_features), -1)
         dft_soap_labels = [f'dftsoap_{i}' for i in range(dft_soap_features.shape[1])]
         dft_soap_df = pd.DataFrame(dft_soap_features, columns=dft_soap_labels)
-    # Append SOAP features to df
-    df = pd.concat([df, dft_soap_df], axis=1)
+        # Append SOAP features to df
+        df = pd.concat([df, dft_soap_df], axis=1)
 
     # Do PCA of SOAP features and append to df
     pca = PCA(whiten=True)

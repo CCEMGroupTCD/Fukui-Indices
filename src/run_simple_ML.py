@@ -321,17 +321,23 @@ def main(experiment, dataset, reference_run, features, target, CV, n_reps, train
 
 if __name__ == '__main__':
 
-    # Define names of features
-    # labels = [f'dftsoap_{i}' for i in range(2400)]            # SOAP features
-    labels = [f'dftpca_{i}' for i in range(132)]              # PCA features
-    # labels = ['Hammett m', 'Hammett p', 'Hammett o py only']    # Hammett features
+    # Choose features to use
+    labels = [f'uffsoap_{i}' for i in range(2400)]            # UFF SOAP features
+    # labels = [f'dftsoap_{i}' for i in range(2400)]            # DFT SOAP features
+    # labels = [f'uffpca_{i}' for i in range(20)]               # UFF PCA20 features
+    # labels = [f'uffpca_{i}' for i in range(50)]               # UFF PCA50 features
+    # labels = [f'uffpca_{i}' for i in range(124)]              # UFF PCA124 features
+    # labels = [f'dftpca_{i}' for i in range(20)]               # DFT PCA20 features
+    # labels = [f'dftpca_{i}' for i in range(50)]               # DFT PCA50 features
+    # labels = [f'dftpca_{i}' for i in range(124)]              # DFT PCA124 features
+    # labels = ['Hammett m', 'Hammett p', 'Hammett o py only']  # Hammett features
 
     ###### START OF OPTIONS ######
     # Please set these options to control the ML script.
 
     # ========   Options for machine learning project   ========
     # General
-    experiment = 'all_models_dftpca132'  # str: name of experiment for labeling the output directory and printing.
+    experiment = 'test'  # str: name of experiment for labeling the output directory and printing.
     random_seed = 1  # In this project we tried seeds [1, 2, 3, 4, 5] for XGBC.
     use_models = ['XGBC', 'RFC', 'LogR', 'NNC', 'GPC']  # list: models to use out of ['XGBC', 'RFC', 'LogR', 'NNC', 'GPC']
     # Cross validation

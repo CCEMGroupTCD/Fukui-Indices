@@ -1,0 +1,17 @@
+experiment: all_models_dftpca124
+dataset: ../data/generate_features/fukui_soap_pca.csv
+features: ['dftpca_0', 'dftpca_1', 'dftpca_2', 'dftpca_3', 'dftpca_4', 'dftpca_5', 'dftpca_6', 'dftpca_7', 'dftpca_8', 'dftpca_9', 'dftpca_10', 'dftpca_11', 'dftpca_12', 'dftpca_13', 'dftpca_14', 'dftpca_15', 'dftpca_16', 'dftpca_17', 'dftpca_18', 'dftpca_19', 'dftpca_20', 'dftpca_21', 'dftpca_22', 'dftpca_23', 'dftpca_24', 'dftpca_25', 'dftpca_26', 'dftpca_27', 'dftpca_28', 'dftpca_29', 'dftpca_30', 'dftpca_31', 'dftpca_32', 'dftpca_33', 'dftpca_34', 'dftpca_35', 'dftpca_36', 'dftpca_37', 'dftpca_38', 'dftpca_39', 'dftpca_40', 'dftpca_41', 'dftpca_42', 'dftpca_43', 'dftpca_44', 'dftpca_45', 'dftpca_46', 'dftpca_47', 'dftpca_48', 'dftpca_49', 'dftpca_50', 'dftpca_51', 'dftpca_52', 'dftpca_53', 'dftpca_54', 'dftpca_55', 'dftpca_56', 'dftpca_57', 'dftpca_58', 'dftpca_59', 'dftpca_60', 'dftpca_61', 'dftpca_62', 'dftpca_63', 'dftpca_64', 'dftpca_65', 'dftpca_66', 'dftpca_67', 'dftpca_68', 'dftpca_69', 'dftpca_70', 'dftpca_71', 'dftpca_72', 'dftpca_73', 'dftpca_74', 'dftpca_75', 'dftpca_76', 'dftpca_77', 'dftpca_78', 'dftpca_79', 'dftpca_80', 'dftpca_81', 'dftpca_82', 'dftpca_83', 'dftpca_84', 'dftpca_85', 'dftpca_86', 'dftpca_87', 'dftpca_88', 'dftpca_89', 'dftpca_90', 'dftpca_91', 'dftpca_92', 'dftpca_93', 'dftpca_94', 'dftpca_95', 'dftpca_96', 'dftpca_97', 'dftpca_98', 'dftpca_99', 'dftpca_100', 'dftpca_101', 'dftpca_102', 'dftpca_103', 'dftpca_104', 'dftpca_105', 'dftpca_106', 'dftpca_107', 'dftpca_108', 'dftpca_109', 'dftpca_110', 'dftpca_111', 'dftpca_112', 'dftpca_113', 'dftpca_114', 'dftpca_115', 'dftpca_116', 'dftpca_117', 'dftpca_118', 'dftpca_119', 'dftpca_120', 'dftpca_121', 'dftpca_122', 'dftpca_123']
+target: classifier_Selection
+CV: LeaveOneOut
+n_reps: 5
+trainfrac: 0.8
+group: molecule_name
+scores: ['Acc_group']
+outdir: ../data/ml_results
+hparams_file: hparams.yml
+use_data_frac: None
+xscaler: StandardScaler()
+yscaler: None
+random_seed: 1
+use_models: ['XGBC', 'RFC', 'LogR', 'NNC', 'GPC']
+runtype: proba_classification

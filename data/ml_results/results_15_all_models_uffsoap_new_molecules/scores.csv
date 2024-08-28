@@ -1,0 +1,12 @@
+# "All scores of the run."
+,value,score,CV,CV_col,model,target,mean,sem
+0,1.0,Acc_group,train,CV_0,XGBC,classifier_Selection,1.0,
+1,1.0,Acc_group,test,CV_0,XGBC,classifier_Selection,1.0,
+0,1.0,Acc_group,train,CV_0,RFC,classifier_Selection,1.0,
+1,1.0,Acc_group,test,CV_0,RFC,classifier_Selection,1.0,
+0,1.0,Acc_group,train,CV_0,LogR,classifier_Selection,1.0,
+1,1.0,Acc_group,test,CV_0,LogR,classifier_Selection,1.0,
+0,1.0,Acc_group,train,CV_0,NNC,classifier_Selection,1.0,
+1,1.0,Acc_group,test,CV_0,NNC,classifier_Selection,1.0,
+0,1.0,Acc_group,train,CV_0,GPC,classifier_Selection,1.0,
+1,1.0,Acc_group,test,CV_0,GPC,classifier_Selection,1.0,
